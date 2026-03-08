@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokedex</title>
+
+  <script defer src="./scripts/template.js"></script>
+  <script defer src="./script.js"></script>
+
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./styles/standard.css" />
+  <link rel="stylesheet" href="./styles/assets.css" />
+  <link rel="stylesheet" href="./styles/fonts.css" />
+
+  <link rel="icon" type="image/png" href="./assets/icons/logos/pokemon-logo-color.png" />
+
+</head>
+
+<body onload="init()">
+
+  <header>
+    <div class="logo-div">
+      <img src="./assets/icons/logos/pokemon-logo-color.png" alt="Logo Pokedex">
+      <div class="header-h1">
+        <h1>Pokedex</h1>
+      </div>
+    </div>
+
+    <div class="input-div">
+      <input id="search-pokemon" type="search" class="input-field" placeholder="Search your Pokémon"
+        oninput="searchPokemon()">
+    </div>
+
+    <ul class="type-div">
+
+      <button onclick="filterPokemonType('bug')">
+        <img src="./assets/icons/pokemon-types/bug.svg" alt="pokemon-type-bug">
+      </button>
+
+      <button onclick="filterPokemonType('dark')">
+        <img src="./assets/icons/pokemon-types/dark.svg" alt="pokemon-type-dark">
+      </button>
+
+      <button onclick="filterPokemonType('dragon')">
+        <img src="./assets/icons/pokemon-types/dragon.svg" alt="pokemon-type-dragon">
+      </button>
+
+      <button onclick="filterPokemonType('electric')">
+        <img src="./assets/icons/pokemon-types/electric.svg" alt="pokemon-type-electric">
+      </button>
+
+      <button onclick="filterPokemonType('fairy')">
+        <img src="./assets/icons/pokemon-types/fairy.svg" alt="pokemon-type-fairy">
+      </button>
+
+      <button onclick="filterPokemonType('fighting')">
+        <img src="./assets/icons/pokemon-types/fighting.svg" alt="pokemon-type-fighting">
+      </button>
+
+      <button onclick="filterPokemonType('fire')">
+        <img src="./assets/icons/pokemon-types/fire.svg" alt="pokemon-type-fire">
+      </button>
+
+      <button onclick="filterPokemonType('flying')">
+        <img src="./assets/icons/pokemon-types/flying.svg" alt="pokemon-type-flying">
+      </button>
+
+      <button onclick="filterPokemonType('ghost')">
+        <img src="./assets/icons/pokemon-types/ghost.svg" alt="pokemon-type-ghost">
+      </button>
+
+      <button onclick="filterPokemonType('grass')">
+        <img src="./assets/icons/pokemon-types/grass.svg" alt="pokemon-type-grass">
+      </button>
+
+      <button onclick="filterPokemonType('ground')">
+        <img src="./assets/icons/pokemon-types/ground.svg" alt="pokemon-type-ground">
+      </button>
+
+      <button onclick="filterPokemonType('ice')">
+        <img src="./assets/icons/pokemon-types/ice.svg" alt="pokemon-type-ice">
+      </button>
+
+      <button onclick="filterPokemonType('normal')">
+        <img src="./assets/icons/pokemon-types/normal.svg" alt="pokemon-type-normal">
+      </button>
+
+      <button onclick="filterPokemonType('poison')">
+        <img src="./assets/icons/pokemon-types/poison.svg" alt="pokemon-type-poison">
+      </button>
+
+      <button onclick="filterPokemonType('psychic')">
+        <img src="./assets/icons/pokemon-types/psychic.svg" alt="pokemon-type-psychic">
+      </button>
+
+      <button onclick="filterPokemonType('rock')">
+        <img src="./assets/icons/pokemon-types/rock.svg" alt="pokemon-type-rock">
+      </button>
+
+      <button onclick="filterPokemonType('steel')">
+        <img src="./assets/icons/pokemon-types/steel.svg" alt="pokemon-type-steel">
+      </button>
+
+      <button onclick="filterPokemonType('water')">
+        <img src="./assets/icons/pokemon-types/water.svg" alt="pokemon-type-water">
+      </button>
+
+    </ul>
+  </header>
+
+  <main>
+    <div id="loading-spinner" class="hidden">
+      <img src="./assets/icons/logos/pokemon-logo-color.png" alt="Loading Spinner">
+    </div>
+
+    <ul id="pokecard-container"></ul>
+
+    <div class="load-btn-div">
+      <button id="load-btn" class="load-btn d-none" onclick="loadMorePokemons()">Load more Pokémons</button>
+      <p id="note"></p>
+    </div>
+
+  </main>
+
+
+  <footer></footer>
+
+</body>
+
+</html>

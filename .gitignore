@@ -1,0 +1,9 @@
+# Windows
+Thumbs.db
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Log-Dateien
+*.log
