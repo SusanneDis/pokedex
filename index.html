@@ -117,9 +117,14 @@
 
     <ul id="pokecard-container"></ul>
 
-    <div class="load-btn-div">
-      <button id="load-btn" class="load-btn d-none" onclick="loadMorePokemons()">Load more Pokémons</button>
+    <div id="load-more-btn" class="load-btn-div d-none">
+      <button class="load-btn" onclick="loadMorePokemons()">Load more Pokémons</button>
       <p id="note"></p>
+    </div>
+
+    <div class="load-btn-div d-none">
+      <button class="load-btn" onclick="returnToList()">Return</button>
+      <p id="note">Alle Pokemon sind geladen</p>
     </div>
 
   </main>
