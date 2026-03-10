@@ -20,7 +20,7 @@
 
 <body onload="init()">
 
-  <header>
+  <header>  
     <div class="logo-div">
       <img src="./assets/icons/logos/pokemon-logo-color.png" alt="Logo Pokedex">
       <div class="header-h1">
@@ -117,15 +117,20 @@
 
     <ul id="pokecard-container"></ul>
 
-    <div id="load-more-btn" class="load-btn-div d-none">
-      <button class="load-btn" onclick="loadMorePokemons()">Load more Pokémons</button>
+    <div id="load-btn-div" class="load-btn-div d-none">
+      <button id="load-btn" class="load-btn" onclick="loadMorePokemons()">Load more Pokémons</button>
       <p id="note"></p>
     </div>
 
     <div class="load-btn-div d-none">
       <button class="load-btn" onclick="returnToList()">Return</button>
-      <p id="note">Alle Pokemon sind geladen</p>
+      <p id="return-note"></p>
     </div>
+
+    <dialog id="pokemon-dialog">
+      <div id="dialog-content">
+      </div>
+    </dialog>
 
   </main>
 
