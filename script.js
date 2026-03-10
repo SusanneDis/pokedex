@@ -1,6 +1,6 @@
 let offset = 0;
 let limit = 30;
-let maxPokemons = 100;
+let maxPokemons = 60;
 
 let pokemonList = [];
 let pokemonDetails = [];
@@ -15,7 +15,6 @@ async function init() {
   hideSpinner();
   showLoadButton();
   updateLoadButton();
-  hideSpinner();
 }
 
 function showSpinner() {
@@ -63,15 +62,19 @@ async function fetchPokemonDetails() {
 
 function renderAllPokemons() {
   const container = document.getElementById("pokecard-container");
+  const btn = document.getElementById("load-btn");
+
+  btn.disabled = true;
+
   container.innerHTML = "";
 
   for (let pokemonindex = 0; pokemonindex < pokemonDetails.length; pokemonindex++) {
     const pokemon = pokemonDetails[pokemonindex];
-    
     const typeClass = `type-${pokemon.types[0].type.name}`;
 
     container.innerHTML += getPokemonCardTemplate(pokemon, pokemonindex, typeClass);
   }
+  btn.disabled = false;
 }
 
 function getPokemonCardTemplate(pokemon, pokemonindex, typeClass) {
@@ -112,17 +115,29 @@ function hideSpinner() {
 }
 
 function showLoadButton() {
-  document.getElementById("load-more-btn").classList.remove("d-none");
+  document.getElementById("load-btn-div").classList.remove("d-none");
 }
 
 function updateLoadButton() {
   const btn = document.getElementById("load-btn");
   const note = document.getElementById("note");
   
-  if (offset >= maxPokemons) {
+  if (pokemonDetails.length >= maxPokemons) {
     btn.disabled = true;
+    btn.classList.add("btn-disabled");
+    note.textContent="Alle Pokémon sind geladen"
     } else {
       btn.disabled = false;
+      btn.classList.remove("btn-disabled")
       note.textContent = "";
     }
 }
+
+async function loadMorePokemons() {
+  showSpinner();
+  await fetchPokemonList();
+  await fetchPokemonDetails();
+  renderAllPokemons();
+  updateLoadButton(); 
+  hideSpinner(); 
+  }
