@@ -37,7 +37,7 @@ async function fetchPokemonList() {
     offset += limit;
 
   } catch (error) {
-    console.error("POkemon-Liste konnte nicht geladen werden:", error);
+    console.error("Pokemon-Liste konnte nicht geladen werden:", error);
     throw error;
   }
 }
@@ -121,16 +121,16 @@ function showLoadButton() {
 function updateLoadButton() {
   const btn = document.getElementById("load-btn");
   const note = document.getElementById("note");
-  
+
   if (pokemonDetails.length >= maxPokemons) {
     btn.disabled = true;
     btn.classList.add("btn-disabled");
-    note.textContent="Alle Pokémon sind geladen"
-    } else {
-      btn.disabled = false;
-      btn.classList.remove("btn-disabled")
-      note.textContent = "";
-    }
+    note.textContent = "Alle Pokémon sind geladen"
+  } else {
+    btn.disabled = false;
+    btn.classList.remove("btn-disabled")
+    note.textContent = "";
+  }
 }
 
 async function loadMorePokemons() {
@@ -138,6 +138,186 @@ async function loadMorePokemons() {
   await fetchPokemonList();
   await fetchPokemonDetails();
   renderAllPokemons();
-  updateLoadButton(); 
-  hideSpinner(); 
+  updateLoadButton();
+  hideSpinner();
+}
+
+//dialogue-section
+
+function openDialog(pokemonindex) {
+  currentIndex = pokemonindex;
+  const pokemon = pokemonDetails[pokemonindex];
+  const dialogRef = document.getElementById("pokemon-dialog");
+
+  const typeClass = `type-${pokemon.types[0].type.name}`;
+
+  const content = document.getElementById("dialog-content");
+  content.innerHTML = getDialogTemplate(pokemon, typeClass);
+
+  dialogRef.showModal();
+}
+
+function getDialogTemplate(pokemon, typeClass) {
+  return `
+    <div class="navigation">
+        <button class="x-dialog" aria-label="Dialog schliessen" onclick="closeDialog()">
+          <span>&#215;</span>
+        </button>
+    </div>
+
+    <h2 class="center-dialog-name">${pokemon.name}</h2>
+
+    <div class="poke-img-div center-dialog-img ${typeClass}">
+        <img class="dialog-img" src="${pokemon.sprites.other["official-artwork"].front_default}">
+    </div>
+
+    <p class="center-dialog-id">#${pokemon.id}</p>
+
+    <div class="pokemon-details">
+        <div tabindex="0" onclick="showMain()">main</div>
+        <div tabindex="0" onclick="showStats()">stats</div>
+        <div tabindex="0" onclick="fetchSpecies()">evo chain</div>
+    </div>
+
+    <div class="details-container">
+        <div id="details-box" class="details-box"></div>
+    </div>
+
+    <div class="buttons-left-right">
+        <button class="arrow" aria-label="Vorheriges Pokémon" onclick="prevPokemon()">
+            <span>&#10094;</span>
+        </button>
+        <button class="arrow" aria-label="Nächstes Pokémon" onclick="nextPokemon()">
+            <span>&#10095;</span>
+        </button>
+    </div>  
+    `;
+}
+
+function closeDialog() {
+  document.getElementById("pokemon-dialog").close();
+}
+
+function nextPokemon() {
+  currentIndex++;
+
+  if (currentIndex >= pokemonDetails.length) {
+    currentIndex = 0;
   }
+  openDialog(currentIndex);
+}
+
+function prevPokemon() {
+  currentIndex--;
+
+  if (currentIndex < 0) {
+    currentIndex = pokemonDetails.length - 1
+  }
+  openDialog(currentIndex);
+}
+
+
+function showMain() {
+  const pokemon = pokemonDetails[currentIndex];
+  const details = document.getElementById("details-box");
+  details.innerHTML = "";
+
+  const height = pokemon.height / 10;
+  const weight = pokemon.weight / 10;
+
+  let abilities = "";
+
+  for (let index = 0; index < pokemon.abilities.length; index++) {
+    const pokemonAbility = pokemon.abilities[index];
+    abilities += pokemonAbility.ability.name + ", ";
+  }
+  details.innerHTML = getShowMainTemplate(pokemon, height, weight, abilities);
+}
+
+function getShowMainTemplate(pokemon, height, weight, abilities) {
+  return `
+      <p><strong>height:</strong> ${height} m</p>
+      <p><strong>weight:</strong> ${weight} kg</p>
+      <p><strong>base experience:</strong> ${pokemon.base_experience}</p>
+      <p><strong>abilities:</strong> ${abilities}</p>
+      `
+}
+
+function showStats() {
+  const pokemon = pokemonDetails[currentIndex];
+  const details = document.getElementById("details-box");
+  details.innerHTML = "";
+
+  let statsHTML = "";
+
+  for (let index = 0; index < pokemon.stats.length; index++) {
+    const pokemonStat = pokemon.stats[index];
+
+    const statName = pokemonStat.stat.name;
+    const statValue = pokemonStat.base_stat;
+
+    statsHTML += `
+        <p>${statName}</p>
+        <div class="progress mb-1">
+          <div class="progress-bar" 
+               role="progressbar"
+               aria-label="${statName}" 
+               aria-valuenow="${statValue}"
+               aria-valuemin="0" 
+               aria-valuemax="255"
+               style="width: ${statValue / 2}%;
+               --bs-progress-bar-bg: rgb(227, 32, 38);">
+            ${statValue}
+          </div>
+        </div>
+     `
+  }
+  details.innerHTML = statsHTML;
+}
+
+async function fetchSpecies() {
+  try {
+    const pokemon = pokemonDetails[currentIndex];
+
+    const speciesResponse = await fetch(pokemon.species.url);
+
+    if (!speciesResponse.ok) {
+      throw new Error("Pokemon-Spezies konnte nicht geladen werden");
+    }
+    const speciesData = await speciesResponse.json();
+    console.log(speciesData)
+
+    fetchEvoChain(speciesData);
+
+  } catch (error) {
+    console.error("Pokemon-Spezies konnte nicht geladen werden:", error);
+    throw error;
+  }
+}
+
+async function fetchEvoChain(speciesData) {
+  try {
+    const evoResponse = await fetch(speciesData.evolution_chain.url);
+
+    if (!evoResponse.ok) {
+      throw new Error("Pokemon-Evolution-Chain konnte nicht geladen werden");
+    }
+      const evoData = await evoResponse.json();
+      console.log(evoData);
+      renderEvo(evoData);
+    
+  } catch (error) {
+    console.error("Pokemon-Evolution-Chain konnte nicht geladen werden:", error);
+    throw error;
+  }
+}
+
+function renderEvo(evoData) {
+  const details = document.getElementById("details-box");
+  details.innerHTML = "";
+
+  console.log(evoData.chain.evolves_to)
+
+  
+  
+}
