@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
   <meta charset="UTF-8">
@@ -9,11 +9,11 @@
   <script defer src="./scripts/template.js"></script>
   <script defer src="./script.js"></script>
 
-  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="./styles/standard.css" />
   <link rel="stylesheet" href="./styles/assets.css" />
   <link rel="stylesheet" href="./styles/fonts.css" />
-  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./style.css" />
 
   <link rel="icon" type="image/png" href="./assets/icons/logos/pokemon-logo-color.png" />
 
@@ -23,7 +23,8 @@
 
   <header>
     <div class="logo-div">
-      <img src="./assets/icons/logos/pokemon-logo-color.png" alt="Logo Pokedex">
+      <span class="center-logo"><img src="./assets/icons/logos/pokemon-logo-color.png" class="poke-logo" onclick="returnToList()"
+        alt="Logo Pokedex"></span>
       <div class="header-h1">
         <h1>Pokedex</h1>
       </div>
@@ -119,12 +120,12 @@
     <ul id="pokecard-container"></ul>
 
     <div id="load-btn-div" class="load-btn-div d-none">
-      <button id="load-btn" class="load-btn" onclick="loadMorePokemons()">Load more Pokémons</button>
+      <button id="load-btn" class="load-btn" onclick="loadMorePokemons()">Load more Pokémon</button>
       <p id="note"></p>
     </div>
 
-    <div class="load-btn-div d-none">
-      <button class="load-btn" onclick="returnToList()">Return</button>
+    <div id="return-btn-div" class="return-btn-div d-none">
+      <button id="return-btn" class="load-btn" onclick="returnToList()">Return</button>
       <p id="return-note"></p>
     </div>
 
@@ -141,4 +142,3 @@
 </body>
 
 </html>
-
