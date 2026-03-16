@@ -60,7 +60,7 @@ async function fetchPokemonDetails() {
   }
 }
 
-function renderAllPokemons() {
+function renderAllPokemons(list = pokemonDetails) {  //if (filtered) is transmitted then list = filtered, otherwise list = pokemonDetails
   const container = document.getElementById("pokecard-container");
   const btn = document.getElementById("load-btn");
 
@@ -68,18 +68,21 @@ function renderAllPokemons() {
 
   container.innerHTML = "";
 
-  for (let pokemonindex = 0; pokemonindex < pokemonDetails.length; pokemonindex++) {
-    const pokemon = pokemonDetails[pokemonindex];
+  for (let pokemonindex = 0; pokemonindex < list.length; pokemonindex++) {
+    const pokemon = list[pokemonindex];
+
+    const originalIndex = pokemonDetails.findIndex(p => p.id === pokemon.id); // index = id
+
     const typeClass = `type-${pokemon.types[0].type.name}`;
 
-    container.innerHTML += getPokemonCardTemplate(pokemon, pokemonindex, typeClass);
+    container.innerHTML += getPokemonCardTemplate(pokemon, originalIndex, typeClass);
   }
   btn.disabled = false;
 }
 
-function getPokemonCardTemplate(pokemon, pokemonindex, typeClass) {
+function getPokemonCardTemplate(pokemon, originalIndex, typeClass) {
   return `
-  <li class="poke-card" tabindex="0" onclick="openDialog(${pokemonindex})">
+  <li class="poke-card" tabindex="0" onclick="openDialog(${originalIndex})">
       <p class="poke-id">#${pokemon.id}</p>
       <div class="poke-img-div ${typeClass}">
           <img class="poke-img" src="${pokemon.sprites.other['official-artwork'].front_default}" alt="${pokemon.name}">
@@ -137,7 +140,7 @@ async function loadMorePokemons() {
   showSpinner();
   await fetchPokemonList();
   await fetchPokemonDetails();
-  renderAllPokemons();
+  renderAllPokemons(pokemonDetails);
   updateLoadButton();
   hideSpinner();
 }
@@ -153,6 +156,8 @@ function openDialog(pokemonindex) {
 
   const content = document.getElementById("dialog-content");
   content.innerHTML = getDialogTemplate(pokemon, typeClass);
+  
+  showMain();
 
   dialogRef.showModal();
 }
@@ -302,13 +307,22 @@ async function fetchEvoChain(speciesData) {
     if (!evoResponse.ok) {
       throw new Error("Pokemon-Evolution-Chain konnte nicht geladen werden");
     }
-      const evoData = await evoResponse.json();
-      console.log(evoData);
-      renderEvo(evoData);
-    
+    const evoData = await evoResponse.json();
+    console.log(evoData);
+    renderEvo(evoData);
+
   } catch (error) {
     console.error("Pokemon-Evolution-Chain konnte nicht geladen werden:", error);
     throw error;
+  }
+}
+
+function collectEvolutionNames() {
+  let evolutions = [];
+
+  for (let index = 0; index < chain.evolves_to.length; index++) {
+    const element = array[index];
+
   }
 }
 
@@ -317,7 +331,41 @@ function renderEvo(evoData) {
   details.innerHTML = "";
 
   console.log(evoData.chain.evolves_to)
+}
 
-  
-  
+function searchPokemon() {
+  const input = document.getElementById("search-pokemon");
+  const value = input.value.toLowerCase().trim();
+  if (value.length < 3) return;
+
+  const filtered = pokemonDetails.filter(p => p.name.startsWith(value));
+  renderAllPokemons(filtered);
+
+  document.getElementById("load-btn-div").classList.add("d-none");
+  document.getElementById("return-btn-div").classList.remove("d-none");
+}
+
+function returnToList() {
+  renderAllPokemons();
+  document.getElementById("load-btn-div").classList.remove("d-none");
+  document.getElementById("return-btn-div").classList.add("d-none");
+  document.getElementById("search-pokemon").value = "";
+  document.getElementById("return-note").textContent = "";
+}
+
+function filterPokemonType(type) {
+  const filtered = pokemonDetails.filter(p => p.types.some(t => t.type.name === type)
+  );
+  renderAllPokemons(filtered);
+
+  document.getElementById("load-btn-div").classList.add("d-none");
+  document.getElementById("return-btn-div").classList.remove("d-none");
+
+  const note = document.getElementById("return-note") 
+
+  if (filtered.length === 0) {
+    note.textContent = "Keine Pokémon gefunden.";
+  } else {
+    note.textContent = "";
+  }
 }
