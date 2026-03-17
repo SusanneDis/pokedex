@@ -156,7 +156,7 @@ function openDialog(pokemonindex) {
 
   const content = document.getElementById("dialog-content");
   content.innerHTML = getDialogTemplate(pokemon, typeClass);
-  
+
   showMain();
 
   dialogRef.showModal();
@@ -179,9 +179,9 @@ function getDialogTemplate(pokemon, typeClass) {
     <p class="center-dialog-id">#${pokemon.id}</p>
 
     <div class="pokemon-details">
-        <div tabindex="0" onclick="showMain()">main</div>
-        <div tabindex="0" onclick="showStats()">stats</div>
-        <div tabindex="0" onclick="fetchSpecies()">evo chain</div>
+        <div id="show-main" tabindex="0" onclick="showMain()">main</div>
+        <div id="show-stats" tabindex="0" onclick="showStats()">stats</div>
+        <div id="show-evo" tabindex="0" onclick="fetchSpecies()">evo chain</div>
     </div>
 
     <div class="details-container">
@@ -234,9 +234,14 @@ function showMain() {
 
   for (let index = 0; index < pokemon.abilities.length; index++) {
     const pokemonAbility = pokemon.abilities[index];
-    abilities += pokemonAbility.ability.name + ", ";
+    abilities += pokemonAbility.ability.name;
+    if (index < pokemon.abilities.length - 1) {
+      abilities += ", ";
+    }
   }
   details.innerHTML = getShowMainTemplate(pokemon, height, weight, abilities);
+
+  setActiveTab("show-main");
 }
 
 function getShowMainTemplate(pokemon, height, weight, abilities) {
@@ -245,7 +250,17 @@ function getShowMainTemplate(pokemon, height, weight, abilities) {
       <p><strong>weight:</strong> ${weight} kg</p>
       <p><strong>base experience:</strong> ${pokemon.base_experience}</p>
       <p><strong>abilities:</strong> ${abilities}</p>
-      `
+   `
+}
+
+function setActiveTab(activeId) {
+  const tabs = document.querySelectorAll(".pokemon-details > div");
+
+  for (let index = 0; index < tabs.length; index++) {
+    const dialogTabs = tabs[index];
+    dialogTabs.classList.remove("active");
+  }
+  document.getElementById(activeId).classList.add("active");
 }
 
 function showStats() {
@@ -260,6 +275,7 @@ function showStats() {
 
     const statName = pokemonStat.stat.name;
     const statValue = pokemonStat.base_stat;
+    const percent = Math.min((statValue / 255) * 100, 100);
 
     statsHTML += `
         <p>${statName}</p>
@@ -270,7 +286,7 @@ function showStats() {
                aria-valuenow="${statValue}"
                aria-valuemin="0" 
                aria-valuemax="255"
-               style="width: ${statValue / 2}%;
+               style="width: ${percent}%;
                --bs-progress-bar-bg: rgb(227, 32, 38);">
             ${statValue}
           </div>
@@ -278,6 +294,8 @@ function showStats() {
      `
   }
   details.innerHTML = statsHTML;
+
+  setActiveTab("show-stats");
 }
 
 async function fetchSpecies() {
@@ -317,20 +335,21 @@ async function fetchEvoChain(speciesData) {
   }
 }
 
-function collectEvolutionNames() {
+
+function collectEvolutionNames(chain) {
   let evolutions = [];
 
-  for (let index = 0; index < chain.evolves_to.length; index++) {
-    const element = array[index];
 
-  }
 }
+
 
 function renderEvo(evoData) {
   const details = document.getElementById("details-box");
   details.innerHTML = "";
 
-  console.log(evoData.chain.evolves_to)
+
+ 
+  setActiveTab("show-evo");
 }
 
 function searchPokemon() {
@@ -361,7 +380,7 @@ function filterPokemonType(type) {
   document.getElementById("load-btn-div").classList.add("d-none");
   document.getElementById("return-btn-div").classList.remove("d-none");
 
-  const note = document.getElementById("return-note") 
+  const note = document.getElementById("return-note")
 
   if (filtered.length === 0) {
     note.textContent = "Keine Pokémon gefunden.";
