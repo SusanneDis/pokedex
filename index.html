@@ -11,8 +11,8 @@
 
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="./styles/standard.css" />
-  <link rel="stylesheet" href="./styles/assets.css" />
-  <link rel="stylesheet" href="./styles/fonts.css" />
+   <link rel="stylesheet" href="./styles/fonts.css" />
+  <link rel="stylesheet" href="./styles/assets.css" /> 
   <link rel="stylesheet" href="./style.css" />
 
   <link rel="icon" type="image/png" href="./assets/icons/logos/pokemon-logo-color.png" />
@@ -126,11 +126,11 @@
 
     <div id="return-btn-div" class="return-btn-div d-none">
       <button id="return-btn" class="load-btn" onclick="returnToList()">Return</button>
-      <p id="return-note"></p>
+      <p id="return-note" class="return-note"></p>
     </div>
 
-    <dialog id="pokemon-dialog">
-      <div id="dialog-content">
+    <dialog id="pokemon-dialog" onclick="this.close()">
+      <div id="dialog-content" onclick="event.stopPropagation()">
       </div>
     </dialog>
 
