@@ -11,8 +11,8 @@
 
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="./styles/standard.css" />
-   <link rel="stylesheet" href="./styles/fonts.css" />
-  <link rel="stylesheet" href="./styles/assets.css" /> 
+  <link rel="stylesheet" href="./styles/fonts.css" />
+  <link rel="stylesheet" href="./styles/assets.css" />
   <link rel="stylesheet" href="./style.css" />
 
   <link rel="icon" type="image/png" href="./assets/icons/logos/pokemon-logo-color.png" />
@@ -21,103 +21,110 @@
 
 <body onload="init()">
 
-  <header>
-    <div class="logo-div">
-      <span class="center-logo"><img src="./assets/icons/logos/pokemon-logo-color.png" class="poke-logo" onclick="returnToList()"
-        alt="Logo Pokedex"></span>
+  <header> 
+    <div class="logo-div"> <!-- hier muss ein <a> Link kommen-->
+     
+      <a href="#" onclick="returnToList()" class="center-logo" aria-label="Zurück zur Pokemon-Liste">
+        <img src="./assets/icons/logos/pokemon-logo-color.png" class="poke-logo"
+          onclick="returnToList()" alt="Logo Pokedex"></a>
       <div class="header-h1">
         <h1>Pokedex</h1>
       </div>
     </div>
 
-    <div class="input-div">
+    <form role="search" aria-labelledby="pokemon-suchfeld" class="input-div">
+      <label id="pokemon-suchfeld" for="search-pokemon" class="visually-hidden">Suche deinen Pokémon</label>
       <input id="search-pokemon" type="search" class="input-field" placeholder="Search your Pokémon"
         oninput="searchPokemon()">
-    </div>
+    </form>
 
-    <ul class="type-div">
+    <nav aria-label="Pokemon Typ Filter">
+      <ul class="type-div">
+        <li><button aria-label="Fire" onclick="filterPokemonType('bug')">
+            <img src="./assets/icons/pokemon-types/bug.svg" alt="pokemon-type-bug">
+          </button></li>
 
-      <button onclick="filterPokemonType('bug')">
-        <img src="./assets/icons/pokemon-types/bug.svg" alt="pokemon-type-bug">
-      </button>
+        <li><button aria-label="Dark" onclick="filterPokemonType('dark')">
+            <img src="./assets/icons/pokemon-types/dark.svg" alt="pokemon-type-dark">
+          </button></li>
 
-      <button onclick="filterPokemonType('dark')">
-        <img src="./assets/icons/pokemon-types/dark.svg" alt="pokemon-type-dark">
-      </button>
+        <li><button aria-label="Dragon" onclick="filterPokemonType('dragon')">
+            <img src="./assets/icons/pokemon-types/dragon.svg" alt="pokemon-type-dragon">
+          </button></li>
 
-      <button onclick="filterPokemonType('dragon')">
-        <img src="./assets/icons/pokemon-types/dragon.svg" alt="pokemon-type-dragon">
-      </button>
+        <li><button aria-label="Electric" onclick="filterPokemonType('electric')">
+            <img src="./assets/icons/pokemon-types/electric.svg" alt="pokemon-type-electric">
+          </button></li>
 
-      <button onclick="filterPokemonType('electric')">
-        <img src="./assets/icons/pokemon-types/electric.svg" alt="pokemon-type-electric">
-      </button>
+        <li><button aria-label="Fairy" onclick="filterPokemonType('fairy')">
+            <img src="./assets/icons/pokemon-types/fairy.svg" alt="pokemon-type-fairy">
+          </button></li>
 
-      <button onclick="filterPokemonType('fairy')">
-        <img src="./assets/icons/pokemon-types/fairy.svg" alt="pokemon-type-fairy">
-      </button>
+        <li><button aria-label="Fighting" onclick="filterPokemonType('fighting')">
+            <img src="./assets/icons/pokemon-types/fighting.svg" alt="pokemon-type-fighting">
+          </button></li>
 
-      <button onclick="filterPokemonType('fighting')">
-        <img src="./assets/icons/pokemon-types/fighting.svg" alt="pokemon-type-fighting">
-      </button>
+        <li><button aria-label="Fire" onclick="filterPokemonType('fire')">
+            <img src="./assets/icons/pokemon-types/fire.svg" alt="pokemon-type-fire">
+          </button></li>
 
-      <button onclick="filterPokemonType('fire')">
-        <img src="./assets/icons/pokemon-types/fire.svg" alt="pokemon-type-fire">
-      </button>
+        <li><button aria-label="Flying" onclick="filterPokemonType('flying')">
+            <img src="./assets/icons/pokemon-types/flying.svg" alt="pokemon-type-flying">
+          </button></li>
 
-      <button onclick="filterPokemonType('flying')">
-        <img src="./assets/icons/pokemon-types/flying.svg" alt="pokemon-type-flying">
-      </button>
+        <li><button aria-label="Ghost" onclick="filterPokemonType('ghost')">
+            <img src="./assets/icons/pokemon-types/ghost.svg" alt="pokemon-type-ghost">
+          </button></li>
 
-      <button onclick="filterPokemonType('ghost')">
-        <img src="./assets/icons/pokemon-types/ghost.svg" alt="pokemon-type-ghost">
-      </button>
+        <li><button aria-label="Grass" onclick="filterPokemonType('grass')">
+            <img src="./assets/icons/pokemon-types/grass.svg" alt="pokemon-type-grass">
+          </button></li>
 
-      <button onclick="filterPokemonType('grass')">
-        <img src="./assets/icons/pokemon-types/grass.svg" alt="pokemon-type-grass">
-      </button>
+        <li><button aria-label="Ground" onclick="filterPokemonType('ground')">
+            <img src="./assets/icons/pokemon-types/ground.svg" alt="pokemon-type-ground">
+          </button></li>
 
-      <button onclick="filterPokemonType('ground')">
-        <img src="./assets/icons/pokemon-types/ground.svg" alt="pokemon-type-ground">
-      </button>
+        <li><button aria-label="Ice" onclick="filterPokemonType('ice')">
+            <img src="./assets/icons/pokemon-types/ice.svg" alt="pokemon-type-ice">
+          </button></li>
 
-      <button onclick="filterPokemonType('ice')">
-        <img src="./assets/icons/pokemon-types/ice.svg" alt="pokemon-type-ice">
-      </button>
+        <li><button aria-label="Normal" onclick="filterPokemonType('normal')">
+            <img src="./assets/icons/pokemon-types/normal.svg" alt="pokemon-type-normal">
+          </button></li>
 
-      <button onclick="filterPokemonType('normal')">
-        <img src="./assets/icons/pokemon-types/normal.svg" alt="pokemon-type-normal">
-      </button>
+        <li><button aria-label="Poison" onclick="filterPokemonType('poison')">
+            <img src="./assets/icons/pokemon-types/poison.svg" alt="pokemon-type-poison">
+          </button></li>
 
-      <button onclick="filterPokemonType('poison')">
-        <img src="./assets/icons/pokemon-types/poison.svg" alt="pokemon-type-poison">
-      </button>
+        <li><button aria-label="Psychic" onclick="filterPokemonType('psychic')">
+            <img src="./assets/icons/pokemon-types/psychic.svg" alt="pokemon-type-psychic">
+          </button></li>
 
-      <button onclick="filterPokemonType('psychic')">
-        <img src="./assets/icons/pokemon-types/psychic.svg" alt="pokemon-type-psychic">
-      </button>
+        <li><button aria-label="Rock" onclick="filterPokemonType('rock')">
+            <img src="./assets/icons/pokemon-types/rock.svg" alt="pokemon-type-rock">
+          </button></li>
 
-      <button onclick="filterPokemonType('rock')">
-        <img src="./assets/icons/pokemon-types/rock.svg" alt="pokemon-type-rock">
-      </button>
+        <li><button aria-label="Steel" onclick="filterPokemonType('steel')">
+            <img src="./assets/icons/pokemon-types/steel.svg" alt="pokemon-type-steel">
+          </button></li>
 
-      <button onclick="filterPokemonType('steel')">
-        <img src="./assets/icons/pokemon-types/steel.svg" alt="pokemon-type-steel">
-      </button>
-
-      <button onclick="filterPokemonType('water')">
-        <img src="./assets/icons/pokemon-types/water.svg" alt="pokemon-type-water">
-      </button>
-
-    </ul>
+        <li><button aria-label="Water" onclick="filterPokemonType('water')">
+            <img src="./assets/icons/pokemon-types/water.svg" alt="pokemon-type-water">
+          </button></li>
+      </ul>
+    </nav>
   </header>
 
   <main>
-    <div id="loading-spinner" class="hidden">
+
+    <section aria-label="Loading Spinner">
+    <div id="loading-spinner" role="status" aria-live="polite" class="hidden"> <!-- status kündigt loading an, polite erst wenn Zeit da ist(ohne Unterbruch)-->
       <img src="./assets/icons/logos/pokemon-logo-color.png" alt="Loading Spinner">
     </div>
+    </section>
 
-    <ul id="pokecard-container"></ul>
+    <section aria-label="Pokemon-Karten">
+    <ul id="pokecard-container" aria-live="polite"></ul>
 
     <div id="load-btn-div" class="load-btn-div d-none">
       <button id="load-btn" class="load-btn" onclick="loadMorePokemons()">Load more Pokémon</button>
@@ -128,11 +135,14 @@
       <button id="return-btn" class="load-btn" onclick="returnToList()">Return</button>
       <p id="return-note" class="return-note"></p>
     </div>
+    </section>
 
-    <dialog id="pokemon-dialog" onclick="this.close()">
+    <section aria-label="Pokemon-Dialog">
+    <dialog id="pokemon-dialog" aria-labelledby="dialog-title" onclick="this.close()">
       <div id="dialog-content" onclick="event.stopPropagation()">
       </div>
     </dialog>
+    </section>
 
   </main>
 
