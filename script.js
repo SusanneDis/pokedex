@@ -145,7 +145,7 @@ async function loadMorePokemons() {
   hideSpinner();
 }
 
-//dialogue-section
+//dialog-section
 
 function openDialog(pokemonindex) {
   currentIndex = pokemonindex;
@@ -336,12 +336,19 @@ async function fetchEvoChain(speciesData) {
 }
 
 
-function collectEvolutionNames(chain) {
+function collectEvolutionNames(evoData) {
   let evolutions = [];
 
-
+  function collect(current) {
+  evolutions.push(current.species.name);
+ 
+  for (let index = 0; index < current.evolves_to.length; index++) {
+    collect(current.evolves_to[index]);
 }
-
+  }
+  collect(evoData.chain);
+  return evolutions;
+}
 
 function renderEvo(evoData) {
   const details = document.getElementById("details-box");
