@@ -52,14 +52,13 @@ h2 {
   font-size: 18px;
   padding: 0 10px;
 }
-/*
+
 .visually-hidden { 
  position: absolute;
  width: 1px;
  height: 1px;
  padding: 0;
 }
-*/
 
 /*main*/
 
@@ -386,22 +385,25 @@ main {
   background-color: rgb(63, 63, 64);
 }
 
-.pokemon-details>div {
+.pokemon-details>button {
   flex: 1;
+  display: block;
   text-align: center;
   padding: clamp(8px, 2vw, 12px) 0;
   border: 1px solid rgb(44, 44, 45);
   border-bottom: 3px solid transparent;
   font-size: clamp(16px, 3.5vw, 21px);
+  color: white;
   transition: background-color 0.2s ease, border-bottom 0.2s ease;
   user-select: none;
+  background: none;
 }
 
-.pokemon-details>div:hover {
+.pokemon-details>button:hover {
   cursor: pointer;
 }
 
-.pokemon-details>div.active {
+.pokemon-details>button.active {
   border-bottom: 3px solid rgb(247, 45, 9);
   background-color: rgb(33, 32, 32);
 }
