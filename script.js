@@ -206,7 +206,7 @@ function resetDetailsBox() {
 
 
 function setActiveTab(activeId) {
-  const tabs = document.querySelectorAll(".pokemon-details > div");
+  const tabs = document.querySelectorAll(".pokemon-details > button");
 
   for (let index = 0; index < tabs.length; index++) {
     const dialogTabs = tabs[index];
