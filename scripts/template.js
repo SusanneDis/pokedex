@@ -1,16 +1,18 @@
 
 function getPokemonCardTemplate(pokemon, originalIndex, typeClass) {
   return `
-  <li class="poke-card" tabindex="0" onclick="openDialog(${originalIndex})">
+  <button>
+  <li class="poke-card" onclick="openDialog(${originalIndex})">
       <p class="poke-id">#${pokemon.id}</p>
       <div class="poke-img-div ${typeClass}">
-          <img class="poke-img" src="${pokemon.sprites.other['official-artwork'].front_default}" alt="${pokemon.name}">
+          <img class="poke-img" src="${pokemon.sprites.other['official-artwork'].front_default}" alt="Bild von ${pokemon.name}">
       </div>
       <h2 class="poke-name">${pokemon.name}</h2>
       <div class="poke-types">
       ${getPokemonTypesHTML(pokemon)}
       </div>
   </li>
+  </button>
   `
 }
 
@@ -38,15 +40,15 @@ function getDialogTemplate(pokemon, typeClass) {
     <h2 id="dialog-title" class="center-dialog-name">${pokemon.name}</h2>
 
     <div class="poke-img-div center-dialog-img ${typeClass}">
-        <img class="dialog-img" src="${pokemon.sprites.other["official-artwork"].front_default}">
+        <img class="dialog-img" src="${pokemon.sprites.other["official-artwork"].front_default}" alt="${pokemon.name}">
     </div>
 
     <p class="center-dialog-id">#${pokemon.id}</p>
 
     <div class="pokemon-details">
-        <div id="show-main" tabindex="0" onclick="showMain()">main</div>
-        <div id="show-stats" tabindex="0" onclick="showStats()">stats</div>
-        <div id="show-evo" tabindex="0" onclick="fetchSpecies()">evo chain</div>
+        <button id="show-main" role="tab" onclick="showMain()">main</button>
+        <button id="show-stats" role="tab" onclick="showStats()">stats</button>
+        <button id="show-evo" role="tab" onclick="fetchSpecies()">evo chain</button>
     </div>
 
     <div class="details-container">
@@ -97,12 +99,12 @@ function getPokemonEvoTemplate(pokemon) {
     <img 
       class="evo-img" 
         src="${pokemon.sprites.other['official-artwork'].front_default}" 
-        alt="${pokemon.name}" title="${pokemon.name}"
+        alt="Entwicklung: ${pokemon.name}" title="${pokemon.name}"
     >`;
 }
 
 function getEvoArrowTemplate() {
     return `
-        <span class="evo-arrow"> &gt; </span>
+        <span class="evo-arrow" aria-hidden="true"> &gt; </span>
      `;      
 }
