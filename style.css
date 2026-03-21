@@ -260,45 +260,6 @@ main {
   display: inline-block;
 }
 
-/*load-button*/
-
-.load-btn-div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-}
-
-.return-btn-div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-}
-
-.d-none {
-  display: none;
-}
-
-.load-btn {
-  background: rgb(227, 32, 38);
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  font-size: 18px;
-  font-weight: bold;
-  border-radius: 10px;
-
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.btn-disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
 
 /*dialogue*/
 
@@ -396,7 +357,7 @@ main {
   color: white;
   transition: background-color 0.2s ease, border-bottom 0.2s ease;
   user-select: none;
-  background: none;
+  background: none; 
 }
 
 .pokemon-details>button:hover {
@@ -406,6 +367,7 @@ main {
 .pokemon-details>button.active {
   border-bottom: 3px solid rgb(247, 45, 9);
   background-color: rgb(33, 32, 32);
+  font-weight: bold;
 }
 
 .details-container {
@@ -444,6 +406,7 @@ main {
 
 .change-details-box {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   width: 100%;

@@ -1,6 +1,6 @@
 let offset = 0;
-let limit = 30;
-let maxPokemons = 120;
+let limit = 50;
+let maxPokemons = 150;
 
 let pokemonList = [];
 let pokemonDetails = [];

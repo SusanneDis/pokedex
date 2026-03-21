@@ -1,24 +1,23 @@
 
 function getPokemonCardTemplate(pokemon, originalIndex, typeClass) {
   return `
-  <button>
-  <li class="poke-card" onclick="openDialog(${originalIndex})">
-      <p class="poke-id">#${pokemon.id}</p>
-      <div class="poke-img-div ${typeClass}">
-          <img class="poke-img" src="${pokemon.sprites.other['official-artwork'].front_default}" alt="Bild von ${pokemon.name}">
-      </div>
-      <h2 class="poke-name">${pokemon.name}</h2>
-      <div class="poke-types">
-      ${getPokemonTypesHTML(pokemon)}
-      </div>
+  <li>
+     <button class="poke-card" onclick="openDialog(${originalIndex})">
+        <p class="poke-id">#${pokemon.id}</p>
+        <div class="poke-img-div ${typeClass}">
+           <img class="poke-img" src="${pokemon.sprites.other['official-artwork'].front_default}" alt="Bild von ${pokemon.name}">
+        </div>
+        <h2 class="poke-name">${pokemon.name}</h2>
+        <div class="poke-types">${getPokemonTypesHTML(pokemon)}</div>
+     </button>
   </li>
-  </button>
+  
   `
 }
 
 
- function getPokemonTypesTemplate(type) {
-    return `
+function getPokemonTypesTemplate(type) {
+  return `
       <img
          class="type-icon"
          src="./assets/icons/pokemon-types/${type}.svg"
@@ -26,7 +25,7 @@ function getPokemonCardTemplate(pokemon, originalIndex, typeClass) {
          title="${type}"
        >
       `;
-      }
+}
 
 
 function getDialogTemplate(pokemon, typeClass) {
@@ -77,7 +76,7 @@ function getShowMainTemplate(pokemon, height, weight, abilities) {
 }
 
 function getShowStatsTemplate(statName, statValue, percent) {
-    return `
+  return `
         <p>${statName}</p>
         <div class="progress mb-1">
           <div class="progress-bar" 
@@ -92,7 +91,7 @@ function getShowStatsTemplate(statName, statValue, percent) {
           </div>
         </div>
      `
-     }
+}
 
 function getPokemonEvoTemplate(pokemon) {
   return `
@@ -104,7 +103,7 @@ function getPokemonEvoTemplate(pokemon) {
 }
 
 function getEvoArrowTemplate() {
-    return `
+  return `
         <span class="evo-arrow" aria-hidden="true"> &gt; </span>
-     `;      
+     `;
 }

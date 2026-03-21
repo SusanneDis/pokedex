@@ -22,7 +22,7 @@
 <body onload="init()">
 
   <header> 
-    <div class="logo-div"> <!-- hier muss ein <a> Link kommen-->
+    <div class="logo-div">
      
       <a href="#" onclick="returnToList()" class="center-logo" aria-label="Zurück zur Pokemon-Liste">
         <img src="./assets/icons/logos/pokemon-logo-color.png" class="poke-logo"
@@ -32,8 +32,8 @@
       </div>
     </div>
 
-    <form role="search" class="input-div">
-      <label for="search-pokemon" class="visually-hidden">Suche deinen Pokémon</label>
+    <form role="search" class="input-div" aria-labelledby="search-poke-label">
+      <label id="search-poke-label" for="search-pokemon" class="visually-hidden">Suche deinen Pokémon</label>
       <input id="search-pokemon" type="search" class="input-field" placeholder="Search your Pokémon"
         oninput="searchPokemon()">
     </form>
@@ -118,12 +118,12 @@
   <main>
 
     <section aria-label="Loading Spinner">
-    <div id="loading-spinner" role="status" aria-live="polite" class="hidden"> <!-- status kündigt loading an, polite erst wenn Zeit da ist(ohne Unterbruch)-->
+    <div id="loading-spinner" role="status" aria-live="polite" class="hidden"> <!-- status announces loading, polite means, read if there is time, no interruption-->
       <img src="./assets/icons/logos/pokemon-logo-color.png" alt="Loading Spinner">
     </div>
     </section>
 
-    <section aria-label="Pokemon-Karten">
+    <section aria-label="Pokémon-Karten">
     <ul id="pokecard-container" aria-live="polite"></ul>
 
     <div id="load-btn-div" class="load-btn-div d-none">
@@ -137,7 +137,7 @@
     </div>
     </section>
 
-    <section aria-label="Pokemon-Dialog">
+    <section aria-label="Pokémon-Dialog">
     <dialog id="pokemon-dialog" aria-labelledby="dialog-title" onclick="this.close()">
       <div id="dialog-content" onclick="event.stopPropagation()">
       </div>
