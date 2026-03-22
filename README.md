@@ -88,7 +88,6 @@ The project includes several accessibility improvements:
 - Replaced non-semantic clickable elements with `<button>`  
 - Added ARIA attributes:
   - `aria-label`
-  - `aria-pressed`
   - `aria-live`
 - Improved keyboard navigation  
 - Added hidden labels for screen readers  
