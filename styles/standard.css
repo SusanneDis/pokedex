@@ -34,6 +34,11 @@ button {
   cursor: pointer;
 }
 
+button:focus-visible {
+  outline: 2px solid rgb(247 45 9);
+  outline-offset: 2px;
+}
+
 ul {
 list-style: none;
 padding: 0;

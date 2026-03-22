@@ -148,9 +148,9 @@ main {
 }
 
 .poke-id {
-  font-size: 14px;
+  font-size: clamp(0.75rem, 1.5vw, 0.9rem);
   font-weight: bold;
-  color: #666;
+  color: rgb(68 68 68);
   margin-bottom: 8px;
 }
 
@@ -168,10 +168,10 @@ main {
 }
 
 .poke-name {
-  font-size: 20px;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
   font-weight: bold;
   text-transform: capitalize;
-  color: #333;
+  color: 	rgb(34 34 34);
 }
 
 .poke-types {
@@ -195,6 +195,7 @@ main {
 
 .type-electric {
   background-color: rgb(222, 188, 40);
+  color: 	rgb(34 34 34);
 }
 
 .type-grass {
@@ -215,6 +216,7 @@ main {
 
 .type-fairy {
   background-color: rgb(224, 139, 224);
+  color: 	rgb(34 34 34);
 }
 
 .type-rock {
@@ -239,6 +241,7 @@ main {
 
 .type-ice {
   background-color: rgb(150, 217, 214);
+  color: 	rgb(34 34 34);
 }
 
 .type-fighting {
@@ -392,6 +395,10 @@ main {
 }
 
 /*stats style = bootstrap*/
+
+.progress-bar {
+  border: 1px solid currentColor;
+}
 
 /*evo-chain*/
 .evo-img {
