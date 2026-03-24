@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -21,21 +21,26 @@
 
 <body onload="init()">
 
-  <header> 
+  <header>
     <div class="logo-div">
-     
-      <a href="#" onclick="returnToList()" class="center-logo" aria-label="Zurück zur Pokemon-Liste">
-        <img src="./assets/icons/logos/pokemon-logo-color.png" class="poke-logo"
-          onclick="returnToList()" alt="Logo Pokedex"></a>
+      <a href="#" onclick="returnToList()" class="center-logo" aria-label="back to pokemon list">
+        <img src="./assets/icons/logos/pokemon-logo-color.png" class="poke-logo" onclick="returnToList()"
+          alt="Logo Pokedex"></a>
       <div class="header-h1">
         <h1>Pokedex</h1>
       </div>
     </div>
 
-    <form role="search" class="input-div" aria-labelledby="search-poke-label">
-      <label id="search-poke-label" for="search-pokemon" class="visually-hidden">Suche deinen Pokémon</label>
-      <input id="search-pokemon" type="search" class="input-field" placeholder="Search your Pokémon"
-        oninput="searchPokemon()">
+    <form role="search" class="input-div form-div" aria-labelledby="search-poke-label" onsubmit="searchPokemon(event)">
+      <label id="search-poke-label" for="search-pokemon" class="visually-hidden">Search your Pokémon</label>
+      <input id="search-pokemon" type="search" class="input-field" placeholder="Search your Pokémon">
+
+      <button type="submit" class="search-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white">
+          <path
+            d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
+        </svg>
+      </button>
     </form>
 
     <nav aria-label="Pokemon Typ Filter">
@@ -118,30 +123,31 @@
   <main>
 
     <section aria-label="Loading Spinner">
-    <div id="loading-spinner" role="status" aria-live="polite" class="hidden"> <!-- status announces loading, polite means, read if there is time, no interruption-->
-      <img src="./assets/icons/logos/pokemon-logo-color.png" alt="Loading Spinner">
-    </div>
-    </section>
-
-    <section aria-label="Pokémon-Karten">
-    <ul id="pokecard-container" aria-live="polite"></ul>
-
-    <div id="load-btn-div" class="load-btn-div d-none">
-      <button id="load-btn" class="load-btn" onclick="loadMorePokemons()">Load more Pokémon</button>
-      <p id="note"></p>
-    </div>
-
-    <div id="return-btn-div" class="return-btn-div d-none">
-      <button id="return-btn" class="load-btn" onclick="returnToList()">Return</button>
-      <p id="return-note" class="return-note"></p>
-    </div>
-    </section>
-
-    <section aria-label="Pokémon-Dialog">
-    <dialog id="pokemon-dialog" aria-labelledby="dialog-title" onclick="this.close()">
-      <div id="dialog-content" onclick="event.stopPropagation()">
+      <div id="loading-spinner" role="status" aria-live="polite" class="hidden">
+        <!-- status announces loading, polite means, read if there is time, no interruption-->
+        <img src="./assets/icons/logos/pokemon-logo-color.png" alt="Loading Spinner">
       </div>
-    </dialog>
+    </section>
+
+    <section aria-label="pokémon cards">
+      <ul id="pokecard-container" aria-live="polite"></ul>
+
+      <div id="load-btn-div" class="load-btn-div d-none">
+        <button id="load-btn" class="load-btn" onclick="loadMorePokemons()">Load more Pokémon</button>
+        <p id="note"></p>
+      </div>
+
+      <div aria-label="Return Button" id="return-btn-div" class="return-btn-div d-none">
+        <button id="return-btn" class="load-btn" onclick="returnToList()">Return</button>
+        <p id="return-note" class="return-note"></p>
+      </div>
+    </section>
+
+    <section aria-label="pokémon dialog">
+      <dialog id="pokemon-dialog" aria-labelledby="dialog-title" onclick="this.close()">
+        <div id="dialog-content" onclick="event.stopPropagation()">
+        </div>
+      </dialog>
     </section>
 
   </main>
