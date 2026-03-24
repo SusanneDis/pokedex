@@ -45,6 +45,7 @@
   height: 50px;
   border: black;
   border-radius: 50%;
+  margin-right: 10px;
 
   background: rgb(227, 32, 38);
   font-size: 16px;
@@ -64,3 +65,5 @@
 .search-btn img {
   color: white;
 }
+
+

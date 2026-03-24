@@ -17,11 +17,9 @@ async function init() {
   updateLoadButton();
 }
 
-
 function showSpinner() {
   document.getElementById("loading-spinner").classList.remove("hidden");
 }
-
 
 async function fetchPokemonList() {
   try {
@@ -34,9 +32,9 @@ async function fetchPokemonList() {
     const data = await response.json();
 
     pokemonList.push(...data.results);
-     //moves every single pokemon into pokemonlist-array without array in array
+    //moves every single pokemon into pokemonlist-array without array in array
     console.log(pokemonList);
-       offset += limit;
+    offset += limit;
 
   } catch (error) {
     console.error("Pokemon-Liste konnte nicht geladen werden:", error);
@@ -63,7 +61,6 @@ async function fetchPokemonDetails() {
   }
 }
 
-
 function renderAllPokemons(list = pokemonDetails) {  //normaly list = pokemonDetails, if (filtered) is transmitted then list = filtered 
   const container = document.getElementById("pokecard-container");
   const btn = document.getElementById("load-btn");
@@ -84,28 +81,24 @@ function renderAllPokemons(list = pokemonDetails) {  //normaly list = pokemonDet
   btn.disabled = false;
 }
 
-
 function getPokemonTypesHTML(pokemon) {
   let typesHTML = "";
 
   for (let typesIndex = 0; typesIndex < pokemon.types.length; typesIndex++) {
     const type = pokemon.types[typesIndex].type.name;
 
-    typesHTML += getPokemonTypesTemplate(type); 
+    typesHTML += getPokemonTypesTemplate(type);
   }
   return typesHTML;
 }
-
 
 function hideSpinner() {
   document.getElementById("loading-spinner").classList.add("hidden");
 }
 
-
 function showLoadButton() {
   document.getElementById("load-btn-div").classList.remove("d-none");
 }
-
 
 function updateLoadButton() {
   const btn = document.getElementById("load-btn");
@@ -121,7 +114,6 @@ function updateLoadButton() {
     note.textContent = "";
   }
 }
-
 
 async function loadMorePokemons() {
   showSpinner();
@@ -149,11 +141,9 @@ function openDialog(pokemonindex) {
   dialogRef.showModal();
 }
 
-
 function closeDialog() {
   document.getElementById("pokemon-dialog").close();
 }
-
 
 function nextPokemon() {
   currentIndex++;
@@ -164,7 +154,6 @@ function nextPokemon() {
   openDialog(currentIndex);
 }
 
-
 function prevPokemon() {
   currentIndex--;
 
@@ -174,9 +163,8 @@ function prevPokemon() {
   openDialog(currentIndex);
 }
 
-
 function showMain() {
-    const pokemon = pokemonDetails[currentIndex];
+  const pokemon = pokemonDetails[currentIndex];
   const details = document.getElementById("details-box");
   details.innerHTML = "";
 
@@ -197,13 +185,11 @@ function showMain() {
   setActiveTab("show-main");
 }
 
-
 function resetDetailsBox() {
   const details = document.getElementById("details-box");
   details.classList.remove("change-details-box");
   details.classList.add("details-box");
 }
-
 
 function setActiveTab(activeId) {
   const tabs = document.querySelectorAll(".pokemon-details > button");
@@ -214,7 +200,6 @@ function setActiveTab(activeId) {
   }
   document.getElementById(activeId).classList.add("active");
 }
-
 
 function showStats() {
   const pokemon = pokemonDetails[currentIndex];
@@ -230,14 +215,13 @@ function showStats() {
     const percent = Math.min((statValue / 255) * 100, 100);
 
     statsHTML += getShowStatsTemplate(statName, statValue, percent);
-    }
+  }
 
   details.innerHTML = statsHTML;
 
   resetDetailsBox();
   setActiveTab("show-stats");
 }
-
 
 async function fetchSpecies() {
   try {
@@ -259,7 +243,6 @@ async function fetchSpecies() {
   }
 }
 
-
 async function fetchEvoChain(speciesData) {
   try {
     const evoResponse = await fetch(speciesData.evolution_chain.url);
@@ -277,7 +260,6 @@ async function fetchEvoChain(speciesData) {
   }
 }
 
-
 function collectEvolutionNames(evoData) {
   let evolutions = [];
 
@@ -292,7 +274,6 @@ function collectEvolutionNames(evoData) {
   console.log(evolutions);
   return evolutions;
 }
-
 
 function renderEvo(evoData) {
   const details = document.getElementById("details-box");
@@ -310,32 +291,31 @@ function renderEvo(evoData) {
       html += getPokemonEvoTemplate(pokemon);
     }
     if (pokemon && index < evolutions.length - 1) {
-      html += getEvoArrowTemplate();      
-      }
+      html += getEvoArrowTemplate();
+    }
   }
   details.innerHTML = html;
 
   setActiveTab("show-evo");
 }
 
-
 function searchPokemon(event) {
   event.preventDefault(); //prevents site reload
 
   const input = document.getElementById("search-pokemon");
   const value = input.value.toLowerCase().trim();
-  
+
   if (value.length < 3) {
     return;
   }
-    
+
   const filtered = pokemonDetails.filter(p => p.name.includes(value));
   renderAllPokemons(filtered);
 
   document.getElementById("load-btn-div").classList.add("d-none");
   document.getElementById("return-btn-div").classList.remove("d-none");
 
-   const note = document.getElementById("return-note")
+  const note = document.getElementById("return-note")
 
   if (filtered.length === 0) {
     note.textContent = "no pokémon found";
@@ -344,7 +324,6 @@ function searchPokemon(event) {
   }
 }
 
-
 function returnToList() {
   renderAllPokemons();
   document.getElementById("load-btn-div").classList.remove("d-none");
@@ -352,7 +331,6 @@ function returnToList() {
   document.getElementById("search-pokemon").value = "";
   document.getElementById("return-note").textContent = "";
 }
-
 
 function filterPokemonType(type) {
   const filtered = pokemonDetails.filter(p => p.types.some(t => t.type.name === type)

@@ -14,7 +14,6 @@ function getPokemonCardTemplate(pokemon, originalIndex, typeClass) {
     `
 }
 
-
 function getPokemonTypesTemplate(type) {
   return `
       <img
@@ -25,7 +24,6 @@ function getPokemonTypesTemplate(type) {
        >
       `;
 }
-
 
 function getDialogTemplate(pokemon, typeClass) {
   return `
@@ -63,7 +61,6 @@ function getDialogTemplate(pokemon, typeClass) {
     </div>  
     `;
 }
-
 
 function getShowMainTemplate(pokemon, height, weight, abilities) {
   return `
