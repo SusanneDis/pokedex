@@ -64,5 +64,65 @@ The application follows a modular structure:
 
 UI is generated using template functions:
 
-```js
 getPokemonCardTemplate(pokemon, index, typeClass)
+
+## ⚡ Performance Considerations
+
+- Batch loading using `offset` and `limit`  
+- Avoids loading all Pokémon at once  
+- Improves initial load time  
+
+### Lazy rendering
+
+- “Load more” button appends new Pokémon  
+- Prevents DOM overload  
+
+---
+
+## ♿ Accessibility Considerations
+
+The project includes several accessibility improvements:
+
+- Replaced non-semantic clickable elements with `<button>`  
+- Added ARIA attributes:
+  - `aria-label`
+  - `aria-live`
+- Improved keyboard navigation  
+- Added hidden labels for screen readers  
+- Improved image alternative text  
+
+---
+
+## ⚠️ Known Limitations
+
+- No full focus management in dialog yet  
+- Uses inline `onclick` handlers (could be refactored)  
+- No state management library (intentional for learning purposes)  
+
+---
+
+## 🚀 Possible Improvements
+
+- Refactor to event listeners instead of inline handlers  
+- Implement proper dialog focus trapping  
+- Introduce component-based architecture  
+- Add caching for API responses  
+- Improve error handling and fallback UI  
+
+---
+
+## 🧪 Learning Goals
+
+This project was built to practice:
+
+- working with REST APIs  
+- async/await and error handling  
+- dynamic DOM rendering  
+- structuring medium-sized frontend projects  
+- accessibility fundamentals (WCAG, ARIA)  
+
+---
+
+## 📌 Conclusion
+
+This Pokédex demonstrates how a fully functional, interactive web application can be built using only vanilla JavaScript while maintaining a clean structure and good accessibility practices.
