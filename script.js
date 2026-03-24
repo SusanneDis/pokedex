@@ -1,6 +1,6 @@
 let offset = 0;
-let limit = 50;
-let maxPokemons = 150;
+let limit = 20;
+let maxPokemons = 100;
 
 let pokemonList = [];
 let pokemonDetails = [];
@@ -34,9 +34,9 @@ async function fetchPokemonList() {
     const data = await response.json();
 
     pokemonList.push(...data.results);
+     //moves every single pokemon into pokemonlist-array without array in array
     console.log(pokemonList);
-    //moves every single pokemon into pokemonlist-array without array in array
-    offset += limit;
+       offset += limit;
 
   } catch (error) {
     console.error("Pokemon-Liste konnte nicht geladen werden:", error);
@@ -246,7 +246,7 @@ async function fetchSpecies() {
     const speciesResponse = await fetch(pokemon.species.url);
 
     if (!speciesResponse.ok) {
-      throw new Error("Pokemon-Spezies konnte nicht geladen werden");
+      throw new Error("Pokémon species could not be loaded");
     }
     const speciesData = await speciesResponse.json();
     console.log(speciesData)
@@ -254,7 +254,7 @@ async function fetchSpecies() {
     fetchEvoChain(speciesData);
 
   } catch (error) {
-    console.error("Pokemon-Spezies konnte nicht geladen werden:", error);
+    console.error("Pokémon species could not be loaded:", error);
     throw error;
   }
 }
@@ -265,14 +265,14 @@ async function fetchEvoChain(speciesData) {
     const evoResponse = await fetch(speciesData.evolution_chain.url);
 
     if (!evoResponse.ok) {
-      throw new Error("Pokemon-Evolution-Chain konnte nicht geladen werden");
+      throw new Error("Pokemon evolution chain could not be loaded");
     }
     const evoData = await evoResponse.json();
     console.log(evoData);
     renderEvo(evoData);
 
   } catch (error) {
-    console.error("Pokemon-Evolution-Chain konnte nicht geladen werden:", error);
+    console.error("Pokemon evolution chain could not be loaded:", error);
     throw error;
   }
 }
@@ -319,16 +319,29 @@ function renderEvo(evoData) {
 }
 
 
-function searchPokemon() {
+function searchPokemon(event) {
+  event.preventDefault(); //prevents site reload
+
   const input = document.getElementById("search-pokemon");
   const value = input.value.toLowerCase().trim();
-  if (value.length < 3) return;
-
-  const filtered = pokemonDetails.filter(p => p.name.startsWith(value));
+  
+  if (value.length < 3) {
+    return;
+  }
+    
+  const filtered = pokemonDetails.filter(p => p.name.includes(value));
   renderAllPokemons(filtered);
 
   document.getElementById("load-btn-div").classList.add("d-none");
   document.getElementById("return-btn-div").classList.remove("d-none");
+
+   const note = document.getElementById("return-note")
+
+  if (filtered.length === 0) {
+    note.textContent = "no pokémon found";
+  } else {
+    note.textContent = "";
+  }
 }
 
 
@@ -352,7 +365,7 @@ function filterPokemonType(type) {
   const note = document.getElementById("return-note")
 
   if (filtered.length === 0) {
-    note.textContent = "Keine Pokémon gefunden.";
+    note.textContent = "no pokémon found";
   } else {
     note.textContent = "";
   }
