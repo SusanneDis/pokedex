@@ -2,17 +2,16 @@
 function getPokemonCardTemplate(pokemon, originalIndex, typeClass) {
   return `
   <li>
-     <button class="poke-card" onclick="openDialog(${originalIndex})">
+     <button aria-haspopup="dialog" aria-controls="pokemon-dialog" class="poke-card" onclick="openDialog(${originalIndex})">
         <p class="poke-id">#${pokemon.id}</p>
         <div class="poke-img-div ${typeClass}">
-           <img class="poke-img" src="${pokemon.sprites.other['official-artwork'].front_default}" alt="Bild von ${pokemon.name}">
+           <img class="poke-img" src="${pokemon.sprites.other['official-artwork'].front_default}" alt="picture of ${pokemon.name}">
         </div>
         <h2 class="poke-name">${pokemon.name}</h2>
         <div class="poke-types">${getPokemonTypesHTML(pokemon)}</div>
      </button>
   </li>
-  
-  `
+    `
 }
 
 
@@ -31,7 +30,7 @@ function getPokemonTypesTemplate(type) {
 function getDialogTemplate(pokemon, typeClass) {
   return `
     <div class="navigation">
-        <button class="x-dialog" aria-label="Dialog schliessen" onclick="closeDialog()">
+        <button class="x-dialog" aria-label="close dialog" onclick="closeDialog()">
           <span>&#215;</span>
         </button>
     </div>
@@ -55,10 +54,10 @@ function getDialogTemplate(pokemon, typeClass) {
     </div>
 
     <div class="buttons-left-right">
-        <button class="arrow" aria-label="Vorheriges Pokémon" onclick="prevPokemon()">
+        <button class="arrow" aria-label="previous pokémon" onclick="prevPokemon()">
             <span>&#10094;</span>
         </button>
-        <button class="arrow" aria-label="Nächstes Pokémon" onclick="nextPokemon()">
+        <button class="arrow" aria-label="next pokémon" onclick="nextPokemon()">
             <span>&#10095;</span>
         </button>
     </div>  
@@ -98,7 +97,7 @@ function getPokemonEvoTemplate(pokemon) {
     <img 
       class="evo-img" 
         src="${pokemon.sprites.other['official-artwork'].front_default}" 
-        alt="Entwicklung: ${pokemon.name}" title="${pokemon.name}"
+        alt="evolution: ${pokemon.name}" title="${pokemon.name}"
     >`;
 }
 
