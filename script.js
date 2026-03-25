@@ -1,6 +1,6 @@
 let offset = 0;
 let limit = 20;
-let maxPokemons = 100;
+let maxPokemons = 150;
 
 let pokemonList = [];
 let pokemonDetails = [];
@@ -68,6 +68,7 @@ function renderAllPokemons(list = pokemonDetails) {  //normaly list = pokemonDet
   btn.disabled = true;
 
   container.innerHTML = "";
+  let html ="";
 
   for (let pokemonindex = 0; pokemonindex < list.length; pokemonindex++) {
     const pokemon = list[pokemonindex];
@@ -76,8 +77,9 @@ function renderAllPokemons(list = pokemonDetails) {  //normaly list = pokemonDet
 
     const typeClass = `type-${pokemon.types[0].type.name}`;
 
-    container.innerHTML += getPokemonCardTemplate(pokemon, originalIndex, typeClass);
+    html += getPokemonCardTemplate(pokemon, originalIndex, typeClass);
   }
+  container.innerHTML = html;
   btn.disabled = false;
 }
 
